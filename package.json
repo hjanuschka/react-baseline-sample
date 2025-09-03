@@ -45,6 +45,6 @@
     ]
   },
   "devDependencies": {
-    "baseline-gardener": "^1.0.0"
+    "baseline-gardener": "^1.1.0"
   }
 }
