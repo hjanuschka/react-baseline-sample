@@ -1,0 +1,191 @@
+/* Experimental CSS Features (NOT baseline compatible) */
+
+.experimental-features {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.warning {
+  background: #f39c12;
+  color: white;
+  padding: 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Container Queries (Baseline Newly Available - might trigger warnings) */
+.container-query-demo {
+  container-type: inline-size;
+  container-name: demo-container;
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 2rem 0;
+}
+
+.responsive-card {
+  background: linear-gradient(45deg, #e17055, #d63031);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Container query - only works in modern browsers */
+@container demo-container (min-width: 400px) {
+  .responsive-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+  }
+  
+  .responsive-card h3 {
+    margin: 0;
+  }
+}
+
+/* CSS Nesting (Limited Availability - not baseline) */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  
+  /* This nesting syntax is experimental */
+  & .experimental-button {
+    background: linear-gradient(45deg, #ff7675, #e84393);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(255, 118, 117, 0.4);
+    }
+    
+    &:active {
+      transform: translateY(-1px) scale(1.02);
+    }
+  }
+}
+
+/* Backdrop Filter (Limited Availability - not baseline yet) */
+.status-display {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.status-item {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-left: 4px solid #e17055;
+  padding-left: 1rem;
+  font-family: monospace;
+}
+
+/* Cascade Layers (Baseline Newly Available) */
+@layer base, components, utilities;
+
+@layer base {
+  .experimental-features * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .experimental-button {
+    /* Button styles defined in layer */
+  }
+}
+
+/* Custom Media Queries (Limited Availability - not baseline) */
+@custom-media --narrow-viewport (max-width: 600px);
+
+/* This would use the custom media query if supported */
+@media (--narrow-viewport) {
+  .button-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CSS Subgrid (Limited Availability - not baseline) */
+.subgrid-example {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.subgrid-item {
+  display: grid;
+  grid-template-columns: subgrid; /* This is experimental */
+  border: 1px solid #ddd;
+  padding: 1rem;
+}
+
+/* View Transitions (Limited Availability - not baseline) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.8s;
+  animation-timing-function: ease-in-out;
+}
+
+/* Content Visibility (Limited Availability - not baseline) */
+.lazy-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px;
+}
+
+/* CSS Color Functions (Some limited availability) */
+.modern-colors {
+  background: color(display-p3 1 0.5 0);
+  border: 1px solid oklch(0.7 0.15 180);
+}
+
+/* Scroll Timeline (Limited Availability - not baseline) */
+@scroll-timeline slide-in-timeline {
+  source: selector(.experimental-features);
+  orientation: vertical;
+}
+
+.animated-on-scroll {
+  animation: slide-in 1s slide-in-timeline;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* CSS Anchor Positioning (Limited Availability - not baseline) */
+.anchor {
+  anchor-name: --my-anchor;
+}
+
+.positioned-element {
+  position: absolute;
+  position-anchor: --my-anchor;
+  top: anchor(bottom);
+  left: anchor(left);
+}

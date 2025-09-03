@@ -1,24 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { BaselineFeatures } from './components/BaselineFeatures';
+import { ExperimentalFeatures } from './components/ExperimentalFeatures';
 
 function App() {
+  const [showBaseline, setShowBaseline] = useState(true);
+  const [showExperimental, setShowExperimental] = useState(true);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>🌱 Baseline Gardener Demo</h1>
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Showcasing baseline-compatible vs experimental web features
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
+        <div className="toggle-buttons">
+          <button 
+            onClick={() => setShowBaseline(!showBaseline)}
+            className={showBaseline ? 'active' : ''}
+          >
+            {showBaseline ? '✅' : '⬜'} Baseline Features
+          </button>
+          <button 
+            onClick={() => setShowExperimental(!showExperimental)}
+            className={showExperimental ? 'active' : ''}
+          >
+            {showExperimental ? '⚠️' : '⬜'} Experimental Features
+          </button>
+        </div>
       </header>
+
+      <main className="App-main">
+        {showBaseline && <BaselineFeatures />}
+        {showExperimental && <ExperimentalFeatures />}
+        
+        <div className="instructions">
+          <h3>🚀 Try Baseline Gardener</h3>
+          <p>Run these commands to check this React app:</p>
+          <code>npm run baseline:check</code>
+          <code>npm run baseline:check:strict</code> 
+          <code>npm run baseline:report</code>
+        </div>
+      </main>
     </div>
   );
 }
